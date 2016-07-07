@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(deliLineDescription())
     }
     
     func addNameToDeliLine(name:String) -> String {
@@ -34,6 +35,30 @@ class ViewController: UIViewController {
                 let placeIndex = deliLine.indexOf(name)
                 return "Welcome \(name), you're number \(placeIndex! + 1) in line."
             }
+        }
+    }
+    
+    func nowServing() -> String {
+        var nextCustomer = ""
+        
+        if deliLine.isEmpty {
+            nextCustomer = "There is no-one to be served."
+        } else {
+            nextCustomer = "Now serving \(deliLine[0])!"
+            deliLine.removeAtIndex(0)
+        }
+        return nextCustomer
+    }
+    
+    func deliLineDescription() -> String {
+        if deliLine.isEmpty {
+            return "The line is currently empty."
+        } else {
+            var deliLineList = "The line is: "
+            for person in deliLine {
+                deliLineList.appendContentsOf("\n \(person)")
+            }
+            return deliLineList
         }
     }
 }
